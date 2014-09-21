@@ -1,4 +1,5 @@
 # Component Path Configuration
+export TARGET_CPU_VARIANT := cortex-a8
 export TARGET_PRODUCT := beagleboneblack
 export ANDROID_INSTALL_DIR := $(patsubst %/,%, $(dir $(realpath $(lastword $(MAKEFILE_LIST)))))
 export ANDROID_FS_DIR := $(ANDROID_INSTALL_DIR)/out/target/product/$(TARGET_PRODUCT)/android_rootfs
