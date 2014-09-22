@@ -1,5 +1,4 @@
 # Component Path Configuration
-export TARGET_CPU_VARIANT := cortex-a8
 export TARGET_PRODUCT := beagleboneblack
 export ANDROID_INSTALL_DIR := $(patsubst %/,%, $(dir $(realpath $(lastword $(MAKEFILE_LIST)))))
 export ANDROID_FS_DIR := $(ANDROID_INSTALL_DIR)/out/target/product/$(TARGET_PRODUCT)/android_rootfs
@@ -39,7 +38,7 @@ u-boot_clean:
 	$(MAKE) -C u-boot ARCH=arm CROSS_COMPILE=$(CC_PREFIX) distclean
 
 # Make a tarball for the filesystem
-fs_tarball:
+fs_tarball: $(FS_GET_STATS)
 	rm -rf $(ANDROID_FS_DIR)
 	mkdir $(ANDROID_FS_DIR)
 	cp -r $(ANDROID_INSTALL_DIR)/out/target/product/$(TARGET_PRODUCT)/root/* $(ANDROID_FS_DIR)
@@ -48,7 +47,7 @@ fs_tarball:
 	 ../../../../build/tools/mktarball.sh ../../../host/linux-x86/bin/fs_get_stats android_rootfs . rootfs rootfs.tar.bz2)
 
 # Make NFS tarball of the filesystem
-nfs_tarball:
+nfs_tarball: $(FS_GET_STATS)
 	rm -rf $(ANDROID_FS_DIR)
 	mkdir $(ANDROID_FS_DIR)
 	cp -r $(ANDROID_INSTALL_DIR)/out/target/product/$(TARGET_PRODUCT)/root/* $(ANDROID_FS_DIR)
