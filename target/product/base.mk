@@ -32,6 +32,7 @@ PRODUCT_PACKAGES += \
     dnsmasq \
     framework \
     fsck_msdos \
+    i2c-tools \
     ime \
     javax.obex \
     libSR_AudioIn \
