@@ -23,8 +23,8 @@ cd $2
 rm ${target_tar} > /dev/null 2>&1
 
 # do dirs first
-subdirs=`find ${dir_to_tar} -type d -print`
-files=`find ${dir_to_tar} \! -type d -print`
+subdirs=`find ${dir_to_tar} -type d -print | sed 's,^./,,'`
+files=`find ${dir_to_tar} \! -type d -print | sed 's,^./,,'`
 for f in ${subdirs} ${files} ; do
     curr_perms=`stat -c 0%a $f`
     [ -d "$f" ] && is_dir=1 || is_dir=0
