@@ -2,8 +2,7 @@
 export TARGET_PRODUCT := beagleboneblack
 export ANDROID_INSTALL_DIR := $(patsubst %/,%, $(dir $(realpath $(lastword $(MAKEFILE_LIST)))))
 export ANDROID_FS_DIR := $(ANDROID_INSTALL_DIR)/out/target/product/$(TARGET_PRODUCT)/android_rootfs
-export PATH :=$(PATH):$(ANDROID_INSTALL_DIR)/prebuilts/gcc/linux-x86/arm/arm-gnueabihf-4.7/bin
-export CC_PREFIX :=arm-linux-gnueabihf-
+export CC_PREFIX :=arm-eabi
 
 kernel_not_configured := $(wildcard kernel/.config)
 
@@ -14,9 +13,7 @@ endif
 
 kernel_build: droid
 ifeq ($(strip $(kernel_not_configured)),)
-ifeq ($(TARGET_PRODUCT), beagleboneblack)
 	$(MAKE) -C kernel ARCH=arm am335x_evm_android_defconfig
-endif
 endif
 	$(MAKE) -C kernel ARCH=arm CROSS_COMPILE=$(CC_PREFIX) zImage
 	$(MAKE) -C kernel ARCH=arm CROSS_COMPILE=$(CC_PREFIX) dtbs
