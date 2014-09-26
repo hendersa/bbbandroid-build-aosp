@@ -2,7 +2,7 @@
 export TARGET_PRODUCT := beagleboneblack
 export ANDROID_INSTALL_DIR := $(patsubst %/,%, $(dir $(realpath $(lastword $(MAKEFILE_LIST)))))
 export ANDROID_FS_DIR := $(ANDROID_INSTALL_DIR)/out/target/product/$(TARGET_PRODUCT)/android_rootfs
-export CC_PREFIX :=arm-eabi-
+export CC_PREFIX := $(ANDROID_INSTALL_DIR)/prebuilts/gcc/linux-x86/arm/arm-gnueabihf-4.7/bin/arm-linux-gnueabihf-
 
 kernel_not_configured := $(wildcard kernel/.config)
 
